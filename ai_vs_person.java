@@ -1,6 +1,7 @@
 package mastermind.src;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import java.util.Collections;
 
 public class ai_vs_person {
@@ -14,10 +15,19 @@ public class ai_vs_person {
         Scanner myScanner = new Scanner(System.in);
         String response=myScanner.next();
         ArrayList<Integer> allGuessesCopy = new ArrayList<>(allGuesses);
-        for (int i=1; i<=5; i++){
-            guess=guess(allGuesses, allResponses, allGuessesCopy, guess, response);
-            System.out.println(guess);
-            response = myScanner.next();
+        if (response.equals("40")) {
+            System.out.println("AI Wins");
+        }
+        else {
+            for (int i=1; i<=5; i++){
+                guess=guess(allGuesses, allResponses, allGuessesCopy, guess, response);
+                System.out.println(guess);
+                response = myScanner.next();
+                if (response.equals("40")) {
+                    System.out.println("AI Wins");
+                    break;
+                }
+            }
         }
     }
     static void createAllGuesses(ArrayList<Integer> allGuesses) {
