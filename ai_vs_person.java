@@ -13,9 +13,8 @@ public class ai_vs_person {
         System.out.println(guess);
         Scanner myScanner = new Scanner(System.in);
         String response=myScanner.next();
-        allPossibleGuesses(allGuesses, guess, response);
         ArrayList<Integer> allGuessesCopy = new ArrayList<>(allGuesses);
-        for (int i=1; i<6; i++){
+        for (int i=1; i<=5; i++){
             guess=guess(allGuesses, allResponses, allGuessesCopy, guess, response);
             System.out.println(guess);
             response = myScanner.next();
@@ -82,9 +81,8 @@ public class ai_vs_person {
     }
     public static ArrayList<Integer> allPossibleGuesses(ArrayList<Integer> allGuesses, String lastGuess, String response) {
         ArrayList<Integer> possibleGuesses = new ArrayList<>();
+        possibleGuesses.clear();
         for(int i=0; i<allGuesses.size()-1; i++){
-            if(allGuesses.get(i)==Integer.parseInt(lastGuess))
-                allGuesses.remove(i);
             if(compare(Integer.toString(allGuesses.get(i)), lastGuess).equals(response))
                 possibleGuesses.add(allGuesses.get(i));
         }
@@ -92,7 +90,9 @@ public class ai_vs_person {
     }
     public static void removePossibleGuesses(ArrayList<Integer> possibleGuesses, String lastGuess, String response) {
         for (int i = possibleGuesses.size() - 1; i >= 0; i--) {
-			if (!compare(Integer.toString(possibleGuesses.get(i)),lastGuess).equals(response)) {
+            if(possibleGuesses.get(i)==Integer.parseInt(lastGuess))
+                possibleGuesses.remove(i);
+            if (!compare(Integer.toString(possibleGuesses.get(i)),lastGuess).equals(response)) {
 				possibleGuesses.remove(i);
             }
 		}
@@ -119,9 +119,10 @@ public class ai_vs_person {
 			}
 		}
 		// Use, if possible, consistent codes
-		ArrayList<Integer> consistentBestGuesses = allPossibleGuesses(bestGuesses, lastGuess, response);
+		ArrayList<Integer> consistentBestGuesses = new ArrayList<>(allPossibleGuesses(bestGuesses, lastGuess, response));
 		if(!consistentBestGuesses.isEmpty()) {
-			bestGuesses = consistentBestGuesses;
+            bestGuesses.clear();
+			bestGuesses=new ArrayList<Integer>(consistentBestGuesses);
         }
         int index = bestGuesses.indexOf(Collections.min(bestGuesses));
         String guess=Integer.toString(bestGuesses.get(index));
