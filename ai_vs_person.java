@@ -1,6 +1,7 @@
 package mastermind.src;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Iterator;
 
 import java.util.Collections;
 
@@ -81,9 +82,10 @@ public class ai_vs_person {
                 wrongGuess.add(Character.toString(guess.charAt(i)));
             }
         }
-        for (int i=0; i<wrongCode.size(); i++) {
+        for (int i = wrongCode.size()-1; i >=0; i--) {
             if (wrongCode.contains(wrongGuess.get(i))){
                 whites++;
+                wrongCode.remove(wrongGuess.get(i));
             }
         }
         blackAndWhitePegs=Integer.toString(blacks)+Integer.toString(whites);
@@ -99,13 +101,10 @@ public class ai_vs_person {
         return possibleGuesses;
     }
     public static void removePossibleGuesses(ArrayList<Integer> possibleGuesses, String lastGuess, String response) {
-        for (int i = possibleGuesses.size() - 1; i >= 0; i--) {
-            if(possibleGuesses.get(i)==Integer.parseInt(lastGuess))
+        for (int i = possibleGuesses.size()-1; i >=0; i--) {
+            if (!compare(Integer.toString(possibleGuesses.get(i)),lastGuess).equals(response))
                 possibleGuesses.remove(i);
-            if (!compare(Integer.toString(possibleGuesses.get(i)),lastGuess).equals(response)) {
-				possibleGuesses.remove(i);
-            }
-		}
+        }    
     }
     //copied code:
     public static String guess(ArrayList<Integer> allGuesses, ArrayList<String> allResponses, ArrayList<Integer> possibleGuesses, String lastGuess, String response) {
@@ -127,7 +126,7 @@ public class ai_vs_person {
 				bestGuesses.clear();
 				bestGuesses.add(code);
 			}
-		}
+        }
 		// Use, if possible, consistent codes
 		ArrayList<Integer> consistentBestGuesses = new ArrayList<>(allPossibleGuesses(bestGuesses, lastGuess, response));
 		if(!consistentBestGuesses.isEmpty()) {
