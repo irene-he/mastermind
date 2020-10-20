@@ -1,7 +1,6 @@
 package mastermind.src;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Iterator;
 
 import java.util.Collections;
 
