@@ -35,23 +35,13 @@ public class ai_vs_person {
         int length = 4;
         createAllGuesses2(colours, allGuesses, "", colours.length, length);
     }
-    // The main recursive method
-    // to print all possible
-    // strings of length k
     static void createAllGuesses2(int[] colours, ArrayList<Integer> allGuesses, String temp, int coloursLength, int length) {
         if (length == 0) {
             allGuesses.add(Integer.parseInt(temp));
             return;
         }
-        // One by one add all characters
-        // from set and recursively
-        // call for k equals to k-1
         for (int i = 0; i < coloursLength; i++) {
-
-            // Next character of input added
             String newTemp = temp + colours[i];
-            // k is decreased, because
-            // we have added a new character
             createAllGuesses2(colours, allGuesses , newTemp, coloursLength, length - 1);
         }
     }
@@ -105,32 +95,29 @@ public class ai_vs_person {
                 possibleGuesses.remove(i);
         }    
     }
-    //copied code:
     public static String guess(ArrayList<Integer> allGuesses, ArrayList<String> allResponses, ArrayList<Integer> possibleGuesses, String lastGuess, String response) {
         removePossibleGuesses(possibleGuesses, lastGuess, response);
-		ArrayList<Integer> bestGuesses = new ArrayList<>();
-		bestGuesses.add(possibleGuesses.get(0));
-		int maxMinimum = 0;
-		for (Integer code : allGuesses) {
-			int minimum = Integer.MAX_VALUE;
-			for (String pegs : allResponses) {
-				int removedCodesSize = allPossibleGuesses(possibleGuesses, Integer.toString(code), pegs).size();
-				minimum = Math.min(removedCodesSize, minimum);
-			}
-			if (minimum == maxMinimum && minimum > 0) {
+	ArrayList<Integer> bestGuesses = new ArrayList<>();
+	bestGuesses.add(possibleGuesses.get(0));
+	int maxMinimum = 0;
+	for (Integer code : allGuesses) {
+		int minimum = Integer.MAX_VALUE;
+		for (String pegs : allResponses) {
+			int removedCodesSize = allPossibleGuesses(possibleGuesses, Integer.toString(code), pegs).size();
+			minimum = Math.min(removedCodesSize, minimum);
+		}
+		if (minimum == maxMinimum && minimum > 0)
 				bestGuesses.add(code);
-			}
-			if (minimum > maxMinimum) {
-				maxMinimum = minimum;
-				bestGuesses.clear();
-				bestGuesses.add(code);
-			}
+		if (minimum > maxMinimum) {
+			maxMinimum = minimum;
+			bestGuesses.clear();
+			bestGuesses.add(code);
+		}
         }
-		// Use, if possible, consistent codes
-		ArrayList<Integer> consistentBestGuesses = new ArrayList<>(allPossibleGuesses(bestGuesses, lastGuess, response));
-		if(!consistentBestGuesses.isEmpty()) {
-            bestGuesses.clear();
-			bestGuesses=new ArrayList<Integer>(consistentBestGuesses);
+	ArrayList<Integer> consistentBestGuesses = new ArrayList<>(allPossibleGuesses(bestGuesses, lastGuess, response));
+	if(!consistentBestGuesses.isEmpty()) {
+        	bestGuesses.clear();
+		bestGuesses=new ArrayList<Integer>(consistentBestGuesses);
         }
         int index = bestGuesses.indexOf(Collections.min(bestGuesses));
         String guess=Integer.toString(bestGuesses.get(index));
