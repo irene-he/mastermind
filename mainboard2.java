@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class mainboard2 extends JFrame {
-    JFrame f = new JFrame();
-    JPanel coloursPanel = new JPanel();
     JButton red, yellow, blue, green, magenta, orange, black, white;
     JButton submit, clear;
     
@@ -63,9 +61,6 @@ public class mainboard2 extends JFrame {
         submit = new JButton("SUBMIT");
         style3(submit);
         submit.setBounds(520, 280, 160, 40);
-
-        coloursPanel.setLayout(new GridLayout(1, 6));
-        coloursPanel.setPreferredSize(new Dimension(240, 40));
 
         // add buttons
         add(red);
