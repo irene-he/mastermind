@@ -1,22 +1,19 @@
 package mastermind.src;
 
-import java.util.Random;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
 public class player_vs_ai {
     public static void main(String[] args) {
-        ArrayList<Integer> guesses = new ArrayList<>();
-        ai_vs_person.createAllGuesses(guesses);
+        String codeColours ="RBGPOY";
+	    String secretCode = randomCode(codeColours);
         Scanner myScanner = new Scanner(System.in);
-        String secretCode = randomCode(guesses);
         //System.out.println(secretCode);
         for(int guess=1; guess<=10; guess++) {
-            System.out.println("enter you guess:");
+            System.out.println("Enter you're guess:");
             String input = myScanner.nextLine();
             String answer = ai_vs_person.compare(input, secretCode);
-            System.out.println(answer);
+            System.out.println("Black Pegs: "+answer.charAt(0)+"      White Pegs: "+answer.charAt(1));
             if (answer.equals("40")) {
                 System.out.println("You Won!");
                 break;
@@ -26,10 +23,15 @@ public class player_vs_ai {
             }   
         } 
     }
-    public static String randomCode(ArrayList<Integer> guesses) {
-        int index = (int)(Math.random() *1296)+0;
-        String code = Integer.toString(guesses.get(index));
-        return code;
-    }
+    public static String randomCode(String codeColours) {
+        int index;
+        StringBuilder newGuess = new StringBuilder();
+		for(int i=0;i<4;i++) {
+            index = (int)(Math.random() *5);
+			newGuess.append(Character.toString(codeColours.charAt(index)));
+        }
+        String code = newGuess.toString();
+		return code;
+	}
 
 }
