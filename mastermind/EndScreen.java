@@ -1,3 +1,6 @@
+/*
+ * This class displays the results screen. It reads and writes froma textfile to display previous scores.
+ */
 package mastermind;
 
 import java.io.BufferedReader;
@@ -16,7 +19,7 @@ public class EndScreen extends JFrame {
 	int size;
 	JPanel mainPanel;
 	
-	/* ScoreScreen constructor:
+	/** ScoreScreen constructor:
 	 * This procedural method is the constructor for score screen
 	 * displays the previous hiscores by reading from an input file
 	 * 
@@ -121,7 +124,7 @@ public class EndScreen extends JFrame {
 		StartScreen.style2(quitBtn);
 		
 		tryAgainBtn.addActionListener(new ActionListener() {	// ActionListener for try again button
-			/* actionPerformed method:
+			/** actionPerformed method:
 			 * This procedural method is used when a button is clicked
 			 * 
 			 * List of Local Variables
@@ -138,7 +141,7 @@ public class EndScreen extends JFrame {
 		}); // end ActionListener
 		
 		quitBtn.addActionListener(new ActionListener() {		// ActionListener for quite button
-			/* actionPerformed method:
+			/** actionPerformed method:
 			 * This procedural method is used when a button is clicked
 			 * 
 			 * List of Local Variables
@@ -174,7 +177,7 @@ public class EndScreen extends JFrame {
 		add(quitBtn);										   // add quit button to ScoreScreen JPanel
 	}
 	
-	/* bubbleSorting method:
+	/** bubbleSorting method:
 	 * This functional method sorts the scores array in ascending order.
 	 * Uses the scores array to position names array elements
 	 * 
@@ -205,6 +208,17 @@ public class EndScreen extends JFrame {
 		return num;
 	} // end bubbleSorting method
 	
+	/**style method:
+		 * This procedural method accepts a JLabel and then stylizes it.
+		 * It changes the colours, font, size, and alignment of the label.
+		 * 
+		 * List of Variables: 
+		 * - 'label' is the label that will be altered (type JLabel)
+		 * 
+		 * @param JLabel label
+		 * @return void
+		 * 
+		 */
 	public static void styleJLabel (JLabel label) {
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Monospaced", Font.BOLD, 15));
