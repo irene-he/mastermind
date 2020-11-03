@@ -227,14 +227,13 @@ public class player_vs_player{
 
 		//white pegs
 		for(int i=0;i<wrongGuess.size();i++) {
-			for(int k=0;k<wrongCode.size();k++) {
-				if(wrongCode.get(k).equalsIgnoreCase(wrongGuess.get(i))) {
-					white++;
-					wrongCode.remove(wrongGuess.get(i));
-				}
+			if(wrongCode.contains(wrongGuess.get(i))) {
+				white++;
+				wrongCode.remove(wrongGuess.get(i));
 			}
-
 		}
+
+
 
 		//convert to string
 		for(int i=0;i<black;i++) {
